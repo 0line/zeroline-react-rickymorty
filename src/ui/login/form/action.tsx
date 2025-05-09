@@ -3,6 +3,7 @@
 import { ApiLoginRepository } from "@/modules/login/infraestructure/ApiLoginRepository";
 import { Login} from "@/modules/login/application/login";
 import { User } from "@/modules/login/domain/User";
+import { useAuthStore } from '@/ui/shared/store/authStore';
 
 
 export async function loginAction(_: any, formData: FormData) {
@@ -12,11 +13,11 @@ export async function loginAction(_: any, formData: FormData) {
   const repo = new ApiLoginRepository();
   const login = new Login(repo);
   const result = await login.execute(payload);
-  
+  const { setToken } = useAuthStore.getState();
   if (result.status === 200) {
     const token = result.data?.token;
         if (token) {
-            localStorage.setItem("token", token);
+            setToken(token);
         }
     }
   return result;

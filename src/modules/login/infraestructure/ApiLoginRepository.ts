@@ -12,30 +12,11 @@ export class ApiLoginRepository implements UserRepository {
         });
 
         if (!response.ok) {
-            return new Response(JSON.stringify({ error: 'Error fetching users' }), {
+            return {
                 status: 500,
-                headers: {
-                'Content-Type': 'application/json'
-                }
-            });
-        }
-        
-        const {username, password, token } = await response.json();
-        if (username !== user.username || password !== user.password) {
-            return { error: 'Invalid credentials', status: 401 }
-        }
-
-        const userResponse: ResponseLogin = {
-            status: 200,
-            message: 'User Login successfully',
-            data: {
-                token: token,
-                user: {
-                    username: username,
-                }
+                error: 'Error fetching users'
             }
-        };  
-
-        return userResponse;
+        } 
+        return await response.json();
     }
 }

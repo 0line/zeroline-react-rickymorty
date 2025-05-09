@@ -15,10 +15,15 @@ describe('ApiLoginRepository', () => {
     const fakeUser = { username: 'Test123', password: 'password@2.' } satisfies User;
 
     const fakeResponse = {
-      username: 'Test123',
-      password: 'password@2.',
-      token: true
-    };
+      status: 200,
+      message: "User Login successfully",
+      data: {
+          token: "true",
+          user: {
+              username: "Test123"
+          }
+      }
+  };
     
 
     
@@ -39,15 +44,14 @@ describe('ApiLoginRepository', () => {
   it('retorna error por las credenciales', async () => {
     const fakeUser = { username: 'Test123', password: 'wrong' };
     const fakeResponse = {
-      username: 'Test123',
-      password: 'password@2.',
-      token: true
+      status: 500,
+      error: 'Error fetching users'
     };  
-    (fetch as vi.Mock).mockResolvedValueOnce({ ok: true,  json: async () => fakeResponse}); 
+    (fetch as vi.Mock).mockResolvedValueOnce({ ok: false,  json: async () => fakeResponse}); 
 
     const repo = new ApiLoginRepository();
     const result = await repo.findByUserAndPassword(fakeUser);
     console.log(result.status);
-    expect(result.status).toEqual(401);
+    expect(result.status).toEqual(500);
   }); 
 });

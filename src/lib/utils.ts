@@ -5,8 +5,3 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-
-export function isAuthenticated(): boolean {
-  const token = localStorage.getItem('token');
-  return !!token;
-}

@@ -1,6 +1,10 @@
 {
-    "username": "Test123",
-    "password": "password@2.",
-    "token": true
+    "status": 200,
+    "message": "User Login successfully",
+    "data": {
+        "token": "true",
+        "user": {
+            "username": "Test123"
+        }
+    }
 }
-  

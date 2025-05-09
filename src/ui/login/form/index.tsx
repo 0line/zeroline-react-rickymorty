@@ -26,7 +26,7 @@ export function LoginForm({
 
   useEffect(() => {
     if (result?.status === 200) {
-      navigate({ to: '/admin/dashboard' });
+      navigate({ to: '/dashboard' });
     }
   }, [result, navigate]);
 
@@ -39,7 +39,7 @@ export function LoginForm({
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Ingresa tu usuario y contraseña para acceder al sistema
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -59,7 +59,7 @@ export function LoginForm({
                 />
               </div>
               <div className="grid gap-2">
-                <div className="flex items-center">
+                {/* <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
                   <a
                     href="#"
@@ -67,19 +67,19 @@ export function LoginForm({
                   >
                     Forgot your password?
                   </a>
-                </div>
+                </div> */}
                 <Input id="password" type="password" name="password" required />
               </div>
               <Button type="submit" className="w-full">
                 Login
               </Button>
             </div>
-            <div className="mt-4 text-center text-sm">
+           {/*  <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}
               <a href="#" className="underline underline-offset-4">
                 Sign up
               </a>
-            </div>
+            </div> */}
           </form>
         </CardContent>
       </Card>

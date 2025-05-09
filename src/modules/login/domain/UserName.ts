@@ -1,6 +1,6 @@
 export function isValidUserName(userName: string): boolean {
     const cleaned = userName.replace(/\s+/g, ''); // Elimina todos los espacios
-    return cleaned.length > 3;
+    return cleaned.length > 0;
 }
 
 export function UserNameNotValidError(username: string): Error {

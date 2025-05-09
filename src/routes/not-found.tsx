@@ -1,17 +1,22 @@
 // routes/not-found.route.tsx
-import { createRoute } from '@tanstack/react-router';
+import { createRoute, Navigate } from '@tanstack/react-router';
 import { Route as RootRoute } from './__root';
-import { isAuthenticated } from '@/lib/utils';
+import { useAuthStore } from '@/ui/shared/store/authStore';
+import { useAuthSync } from '@/ui/shared/hooks/useAuthSync';
 
 export const NotFoundRoute = createRoute({
   getParentRoute: () => RootRoute,
   path: '*',
-  beforeLoad: ({ navigate }) => {
-    if (isAuthenticated()) {
-      navigate({ to: '/admin/dashboard' });
+  beforeLoad: () => {
+    const isAuthenticated = useAuthStore.getState().isAuthenticated();
+    if (isAuthenticated) {
+      Navigate({ to: '/dashboard' });
     } else {
-      navigate({ to: '/' });
+      Navigate({ to: '/' });
     }
   },
-  component: () => <div>404 - Página no encontrada</div>, // no renderiza nada, solo redirige
+  component: () => {
+    useAuthSync();
+    return <div>404 - Página no encontrada</div>
+  }, // no renderiza nada, solo redirige
 });
