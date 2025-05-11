@@ -1,11 +1,10 @@
-
 import { CharacterRepository } from "../domain/CharacterRepository";
 
-export function getAllCharacters(
+export function getCharacter(
     repository: CharacterRepository){
-        return async (page: number, name: string) => {
+        return async (id: number|string|null|undefined) => {
             try {
-                return await repository.getAll(page, name);
+                return await repository.getById(id);
             } catch (error) {
                 if (error instanceof Error) {
                     return {
