@@ -21,7 +21,8 @@
     "noUnusedParameters": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/ui/shared/components/*"],
     }
   },
   "include": ["src"]

@@ -51,7 +51,6 @@ describe('ApiLoginRepository', () => {
 
     const repo = new ApiLoginRepository();
     const result = await repo.findByUserAndPassword(fakeUser);
-    console.log(result.status);
     expect(result.status).toEqual(500);
   }); 
 });
